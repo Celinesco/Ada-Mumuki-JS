@@ -659,11 +659,11 @@ Definí una función crearCuentaRegresiva que reciba como argumento un número e
 */
 
 const crearCuentaRegresiva = (inicio) => {
-  let hastaAbajoMami = [inicio,]; 
-  while (inicio > 0 ) {
+  let hastaAbajoMami = [inicio,];
+  while (inicio > 0) {
     inicio--
     hastaAbajoMami.push(inicio)
-    
+
   }
   return hastaAbajoMami
 }
@@ -683,7 +683,7 @@ los mismos valores pero en orden invertido.
 
 const invertir = (array) => {
   let invertido = [];
-  for (let i=array.length-1; i>=0; i--) {
+  for (let i = array.length - 1; i >= 0; i--) {
     invertido.push(array[i])
   }
   return invertido
@@ -706,13 +706,13 @@ array con los mismos valores de array pero sin valores duplicados.
 
 const removerDuplicados = (array) => {
   let sinRepetir = [];
-  for (let i= 0; i<array.length; i++) {
-    if (array[i] !== array[i+1]) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] !== array[i + 1]) {
       sinRepetir.push(array[i])
     }
   }
   return sinRepetir
-       
+
 }
 
 //EJERCICIO 7: REPETIR LETRAS
@@ -728,15 +728,15 @@ cantidad, y devuelva una string donde cada letra de palabra esté repetida canti
 aaaaahhhhh!!!!!'
  repetirLetras('basta', 1)
 'basta'
-*/
+// */
 
-const repetirLetras = (palabra, cantidad) => {
-  let answer = "";
-  for (let i=0; i<palabra.length; i++) {
-    answer = answer.concat(palabra[i].repeat(cantidad));
-  }
-  return answer
-}
+// const repetirLetras = (palabra, cantidad) => {
+//   let answer = "";
+//   for (let i=0; i<palabra.length; i++) {
+//     answer = answer.concat(palabra[i].repeat(cantidad));
+//   }
+//   return answer
+// }
 
 //OTRA SOLUCION
 /*const repetirLetras = (palabra, cantidad) => {
@@ -1057,16 +1057,30 @@ donde cada ítem de la matriz es un ítem aleatorio de items.
   colours[Math.floor(Math.random() * colours.length)] , obtendrías un elemento aleatorio del array colours.
   */
 
-  let generarGrilla = (filas, columnas, array) => {
-    let grilla = [];
-    while (grilla.length < filas) {
-      grilla.push(array[Math.random() * 1])
+let generarGrilla = (filas, columnas, array) => {
+  let grilla = [];
+  for (let i = 0; i < filas; i++) {
+    let subArreglo = [];
+
+
+    for (let j = 0; j < columnas; j++) {
+      subArreglo.push(array[Math.trunc(Math.random()*j)])
+
     }
-    return grilla
-  
+    grilla.push(subArreglo)
+
+
   }
-  
-  // console.log(generarGrilla(10,0,[1,2]))
+  return grilla
+}
+
+console.log(generarGrilla(1,2,['a', '3', 'hola']))
+
+
+
+// console.log(Math.trunc(Math.random()*6))
+
+// console.log(generarGrilla(10,0,[1,2]))
 
 
 //EJERCICIO 5: GENERAR MATRIZ ESCALONADA
@@ -1183,6 +1197,10 @@ si no hay más ítems que agregar.
 
 */
 
+/*
+//PRIMER SOLUCIÓN
+
+
 let convertirEnMatriz = (columnas, array) => {
   let matrizResultado = [];
 
@@ -1196,13 +1214,10 @@ let convertirEnMatriz = (columnas, array) => {
   return matrizResultado
 }
 
-console.log(convertirEnMatriz(2, [1, 2, 3, 4]))
-console.log(convertirEnMatriz(4, [5, 3, 7, 9]))
-console.log(convertirEnMatriz(4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 5]))
-console.log(convertirEnMatriz(3, [1, 2, 3, 4, 5, 6, 7]))
+*/
 
 
-let convertirEnMatriz2 = (columnas, array) => {
+let convertirEnMatriz = (columnas, array) => {
   let matrizResultado = [];
   while (array.length > 0) {
     matrizResultado.push(array.splice(0, columnas))
@@ -1213,4 +1228,87 @@ let convertirEnMatriz2 = (columnas, array) => {
 
 
 
+// console.log(convertirEnMatriz(2, [1, 2, 3, 4]))
+// console.log(convertirEnMatriz(4, [5, 3, 7, 9]))
+// console.log(convertirEnMatriz(4, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 5]))
+// console.log(convertirEnMatriz(3, [1, 2, 3, 4, 5, 6, 7]))
 
+
+
+///EJERCICIO 9 : Consultar Tabla
+
+/*
+Tenemos una matriz que tiene la estructura de una tabla , en donde el primer array contiene el nombre de las columnas, y los siguientes array son las filas donde se ingresan los registros con sus datos en el orden de las columnas. Por ejemplo, si el índice 1 es la columna nombre todas las demás "filas" deben tener el dato nombre en esa posición. La tabla siempre tiene una columna id, que es un identificador único para cada registro (un número incremental).
+
+const tabla = [
+  ['id', 'nombre', 'edad', 'email'],
+  [1, 'Ada', 33, 'ada@gmail.com'],
+  [2, 'Grace', 45, 'grace@gmail.com'],
+]
+Definí la función consultarTablaque tome por parámetro un número id, un string columna, y una matriz tabla y que retorne el valor del dato de la columna dada para el registro con el id indicado.
+
+ consultarTabla(2, 'nombre', tabla)
+'Grace'
+ consultarTabla(1, 'email', tabla)
+'ada@gmail.com'
+
+*/
+
+const tabla = [
+  ['id', 'nombre', 'edad', 'email'],
+  [1, 'Ada', 33, 'ada@gmail.com'],
+  [2, 'Grace', 45, 'grace@gmail.com'],
+]
+
+
+
+let consultarTabla = (id, categoria, tabla) => {
+  for (let i = 0; i < tabla[0].length; i++) {
+    if(tabla[0][i] === categoria) {
+      return tabla[id][i]
+    }
+  }
+}
+
+
+// console.log(consultarTabla(2, 'nombre', tabla))
+
+
+///EJERCICIO 10: Tiene Bloque HOrizontal
+
+/*
+Definí una función tieneBloqueHorizontal que reciba como argumento un array 2d matriz y devuelva si dicha matriz tiene un bloque horizontal de 3 o más ítems consecutivos idénticos.
+
+ tieneBloqueHorizontal([
+  [1, 2, 3],
+  [1, 2, 3],
+  [1, 2, 3],
+])
+false
+
+ tieneBloqueHorizontal([
+  [1, 2, 3, 4],
+  [1, 2, 2, 2],
+  [1, 2, 4, 5],
+])
+true
+
+*/
+
+let tieneBloqueHorizontal = (matriz) => {
+  let acumulador = 0;
+  for (let i = 0; i < matriz.length; i++) {
+    for (let j = 0; j < matriz[i].length; j++) {
+      if (matriz[i][j] === matriz[i][j+1]) {
+        acumulador++
+      }
+     
+    }
+  }
+  return acumulador >=2
+}
+
+
+console.log(tieneBloqueHorizontal([[1, 2, 1, 4],[1, 2, 1, 2],[1, 1, 1, 5],]))
+
+// console.log(tieneBloqueHorizontal([[2, 2, 2],[1, 1, 1],  [1, 1, 1],]))
