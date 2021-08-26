@@ -1343,17 +1343,16 @@ false
 
 
 let tieneBloqueVertical = (matriz) => {
-  let acumulador = 0;
   for (let j = 0; j < matriz[0].length; j++) {
-    for (let i = 0; i < matriz.length; i++) {
-      if (matriz[i][j] === matriz[i][j+1]) {
-      acumulador++
+    for (let i = 0; i < matriz.length-2; i++) {
+      if (matriz[i][j] === matriz[i+1][j] && matriz[i][j] === matriz[i+2][j]) {
+      return true
       }
      
     }
     
   }
-  return acumulador >=2
+  return false
  
 }
 
@@ -1361,7 +1360,7 @@ let tieneBloqueVertical = (matriz) => {
 // console.log(tieneBloqueVertical([
 //   [1, 2, 3, 2],
 //   [7, 2, 9, 2],
-//   [1, 8, 4, 2],
+//   [1, 8, 2, 3],
 // ]) )
 
 // console.log(tieneBloqueVertical([
@@ -1370,4 +1369,9 @@ let tieneBloqueVertical = (matriz) => {
 //   [1, 2, 3],
 // ]))
 
+// console.log(tieneBloqueVertical([
+//   [1, 1, 1],
+//   [1, 1, 1],
+  
+// ]))
 
