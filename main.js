@@ -1296,19 +1296,78 @@ true
 */
 
 let tieneBloqueHorizontal = (matriz) => {
-  let acumulador = 0;
+ 
   for (let i = 0; i < matriz.length; i++) {
-    for (let j = 0; j < matriz[i].length; j++) {
-      if (matriz[i][j] === matriz[i][j+1]) {
-        acumulador++
+    for (let j = 0; j < matriz[i].length-2; j++) {
+      if (matriz[i][j] === matriz[i][j+1] && matriz[i][j] === matriz[i][j+2]) {
+        return true
       }
      
     }
   }
-  return acumulador >=2
+  return false
+  
 }
 
 
-console.log(tieneBloqueHorizontal([[1, 2, 1, 4],[1, 2, 1, 2],[1, 1, 1, 5],]))
+// console.log(tieneBloqueHorizontal([[1, 2, 1, 4],[1, 2, 1, 2],[1, 1, 1, 5],]))
 
-// console.log(tieneBloqueHorizontal([[2, 2, 2],[1, 1, 1],  [1, 1, 1],]))
+// console.log(tieneBloqueHorizontal([[2, 2, 2],[1, 1, 1],[1, 1, 1],]))
+// console.log(tieneBloqueHorizontal([[1, 1, 2],[3, 3, 4],[5, 5, 6],]))
+// console.log(tieneBloqueHorizontal([[1, 1, 2, 1, undefined], [1, 1, 2, 1, 1], [1, 1, 2, 2, 1]]))
+// console.log(tieneBloqueHorizontal([[undefined]]))
+
+
+
+
+//EJERCICIO 11: Tiene Bloque Vertical 
+
+/*
+Definí una función tieneBloqueVertical que tome una matriz y devuelva si la misma tiene un bloque vertical  de 3 o más ítems consecutivos idénticos .
+
+ tieneBloqueVertical([
+  [4, 2, 3],
+  [1, 5, 3],
+  [1, 2, 3],
+])
+true
+
+ tieneBloqueVertical([
+  [1, 2, 3, 4],
+  [7, 2, 9, 2],
+  [1, 8, 4, 5],
+]) 
+false
+
+*/
+
+
+let tieneBloqueVertical = (matriz) => {
+  let acumulador = 0;
+  for (let j = 0; j < matriz[0].length; j++) {
+    for (let i = 0; i < matriz.length; i++) {
+      if (matriz[i][j] === matriz[i][j+1]) {
+      acumulador++
+      }
+     
+    }
+    
+  }
+  return acumulador >=2
+ 
+}
+
+
+// console.log(tieneBloqueVertical([
+//   [1, 2, 3, 2],
+//   [7, 2, 9, 2],
+//   [1, 8, 4, 2],
+// ]) )
+
+// console.log(tieneBloqueVertical([
+//   [1, 1, 1],
+//   [1, 5, 3],
+//   [1, 2, 3],
+// ]))
+
+
