@@ -262,60 +262,71 @@ const obtenerChatStatus = (usuarias) => {
 
 //EJERCICIOS 9 Y 10 NO ME SALIERON PERO VAN LOS INTENTOS
 
-//   let germinar = (plantines) => {
-//     console.log(plantines)
-//     let plantasGerminadas = [];
-//     for (let i=0; i < plantines.length; i++) {
-//       if (plantines[i] === "🌱") {
-//         plantines[i] = plantines[i-1];
 
-//       }
-//       plantasGerminadas.push(plantines[i])
-//     }
-//     return plantasGerminadas
-//   }
+  
+/*let germinar = (plantines) => {
+  let index = plantines.indexOf('🌱');
+  while (index !== -1) {
+    let parte_atras = plantines.slice(0, index);
+    let flor_anterior = plantines.slice(index-2, index);
+    let parte_adelante = plantines.slice(index+2, plantines.length);
+    plantines = parte_atras.concat(flor_anterior).concat(parte_adelante);
+    index = plantines.indexOf('🌱');
+  }
+  return plantines
+}*/
 
 let germinar = (plantines) => {
-  let plantasGerminadas = [];
-  for (let i = 0; i < plantines.length; i++) {
-    if (plantines[i] !== "🌱") {
-      plantasGerminadas.push(plantines[i])
-    }
-    else {
-      plantasGerminadas.push(plantines[i - 1])
-    }
+  let index = plantines.indexOf('🌱');
+  while (index !== -1) {
+    let flor_anterior = plantines.slice(index-2, index);
+    plantines = plantines.replace('🌱', flor_anterior)
+    index = plantines.indexOf('🌱');
   }
-  let stringPlantas = plantasGerminadas.toString()
-  return stringPlantas.replace(/,/g, " ")
-
+  return plantines
 }
+
+
+
+
 
 // console.log(germinar(["🌷","🌱","🌻","🌱","🌸","🌱","🌷","🌱","🌻","🌱","🌸","🌱"]))
 
 
-
-
-
-
 //   console.log(germinar(["🌷","🌱","🌻","🌱","🌸","🌱","🌷","🌱","🌻","🌱","🌸","🌱"]))
 
-//   console.log(germinar("🌷🌱🌻🌱🌸🌱🌷🌱🌻🌱🌸🌱"))
+  // console.log(germinar("🌷🌱🌻🌱🌸🌱🌷🌱🌻🌱🌸🌱"))
 
 
-const comer = (comidita) => {
-  let plantasSobrevivientes = []
-  if (comidita.indexOf("🐰") != -1) {
-    let stopSignal = comidita.indexOf("🚫")
-    for (let i = stopSignal + 1; i < comidita.length; i++) {
-      plantasSobrevivientes.push(comidita[i])
-    }
+  //EJERCICIO 10: Comer
 
-  }
-  return plantasSobrevivientes;
+  /*
+
+  Definí una función comer que reciba como argumento un string que consista en plantas, un conejo y una señal de prohibido.
+   El conejo se come todas las plantas que hay a su derecha, hasta que se encuentra con la señal de prohibido. El programa debe mostrar 
+   las plantas sobrevivientes, que son todas las que están a la izquierda del conejo (si hay) y a la derecha de la señal (si hay). Ejemplo:
+
+ comer('🐰🥕🥬🥕🚫') 
+''
+ comer('🥕🥬🐰🥕🥕🥕🚫')
+'🥕🥬'
+ comer('🐰🥕🥬🥕🚫🥕') 
+'🥕'
+ comer('🌱🥕🌱🐰🌱🥬🌱🌱🚫🌷')
+'🌱🥕🌱🌷'
+  */
+
+
+let comer = (secuencia) => {
+  let posicionConejo = secuencia.indexOf("🐰")
+  let posicionStop = secuencia.indexOf("🚫")
+  return secuencia.slice(0,posicionConejo) + secuencia.slice(posicionStop+2)
 }
 
 
-//   console.log(comer(["🐰","🥕","🥬","🥕","🚫","🥕"]))
+
+  console.log(comer('🐰🥕🥬🥕🚫'))
+  console.log(comer('🌱🥕🌱🐰🌱🥬🌱🌱🚫🌷'))
 
 
 
@@ -1064,7 +1075,7 @@ let generarGrilla = (filas, columnas, array) => {
 
 
     for (let j = 0; j < columnas; j++) {
-      subArreglo.push(array[Math.trunc(Math.random()*j)])
+      subArreglo.push(array[Math.trunc(Math.random()*array.length)])
 
     }
     grilla.push(subArreglo)
@@ -1074,7 +1085,7 @@ let generarGrilla = (filas, columnas, array) => {
   return grilla
 }
 
-console.log(generarGrilla(1,2,['a', '3', 'hola']))
+// console.log(generarGrilla(1,20,['a', '3', 'hola']))
 
 
 
@@ -1375,3 +1386,312 @@ let tieneBloqueVertical = (matriz) => {
   
 // ]))
 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////                ///////////////////////////////////////////
+///////////////////////////////////////////     MÉTODOS    ///////////////////////////////////////////
+///////////////////////////////////////////                ///////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//EJERCICIO 1: NÚMEROS MÁS 10
+
+
+/*
+
+Usando map, definí una función numerosMasDiez que tome una lista de numeros y devuelva un nuevo array incrementando 
+cada elemento original en 10
+
+const numeros = [1, 2, 3, 4, 5];
+ numerosMasDiez(numeros);
+[10, 20, 30, 40, 50]
+
+
+*/
+
+
+
+let numerosMasDiez = (array) => {
+  return array.map(function sumarDiez(numero) {
+    return numero + 10
+  });
+}
+
+
+// console.log(numerosMasDiez([1,2,3,4]))
+
+
+//EJERCICIO 2: Dobles
+
+/*
+
+Usando map definí la función dobles que tome una lista de numeros y devuelva un nuevo array con cada valor multiplicado por dos
+
+const numeros = [3, 7, 13, 99];
+ dobles(numeros)
+[6, 14, 26, 198]
+
+
+*/
+
+let dobles = (array) => {
+  return array.map(function multiplicarPorDos(numero) {
+    return numero*2
+  })
+}
+
+//EJERCICIO 3: GRITAR TODAS 
+
+/*
+Usando map definí la función gritarTodas que tome una lista de frases con frases 
+al azar y devuelva un nuevo array en donde cada frase empiece y termine con un signo de exclamación.
+
+const frases = ['Labore sea dolor.', 'Justo rebum dolor.', 'Stet lorem amet.'];
+
+ gritarTodas(frases)
+['¡Labore sea dolor.!', '¡Justo rebum dolor.!', '¡Stet lorem amet.!']
+
+*/
+
+
+let gritarTodas = (frases) => {
+  return frases.map(function signosDeExclamacion(elementoDeFrases) {
+    return "¡" + elementoDeFrases + "!"
+  })
+}
+
+const frases = ['Labore sea dolor.', 'Justo rebum dolor.', 'Stet lorem amet.'];
+
+//  console.log(gritarTodas(frases))
+
+
+ //EJERCICIO 4: ENLISTAR 
+ /*
+Usando map definí la función enlistar que tome una lista de libros con libros para leer y devuelva un nuevo 
+array en donde cada título de los libros esté dentro de una etiqueta <li></li>.
+
+const librosJS = 
+['JavaScript for Kids: A Playful Introduction to Programming','Composing Software','Eloquent JavaScript: A Modern Introduction to Programming','JavaScript: The Good Parts','Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Moderns JS Libraries','Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript','JavaScript: The Definitive Guide','You Don’t Know JS','JavaScript Allongé: The Six Edition'];
+ enlistar(librosJS)
+['<li>JavaScript for Kids: A Playful Introduction to Programming</li>','<li>Composing Software</li>','<li>Eloquent JavaScript: A Modern Introduction to Programming</li>','<li>JavaScript: The Good Parts</li>','<li>Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Moderns JS Libraries</li>','<li>Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript</li>','<li>JavaScript: The Definitive Guide</li>','<li>You Don’t Know JS</li>','<li>JavaScript Allongé: The Six Edition</li>'];
+ 
+ */
+
+const librosJS = ['JavaScript for Kids: A Playful Introduction to Programming','Composing Software','Eloquent JavaScript: A Modern Introduction to Programming','JavaScript: The Good Parts','Programming JavaScript Applications: Robust Web Architecture with Node, HTML5, and Moderns JS Libraries','Effective JavaScript: 68 Specific Ways to Harness the Power of JavaScript','JavaScript: The Definitive Guide','You Don’t Know JS','JavaScript Allongé: The Six Edition'];
+
+
+let enlistar = (libros) => {
+ return libros.map(function formatoLista(libro) {
+    return ("<li>" + libro + "</li>")
+  })
+
+}
+
+// console.log(enlistar(librosJS))
+
+
+//EJERCICIO 5: Longitudes 
+/*
+Usando map, definí una función longitudes que tome una lista de frases y devuelva un nuevo array que contenga la longitud de cada frase.
+
+const frases = ['Labore sea dolor.', 'Justo rebum dolor.', 'Stet lorem amet.'];
+
+ longitudes(frases)
+[ 17, 18, 16 ]
+
+*/
+
+let longitudes = (frases) => {
+  return frases.map( function medicionFrase(frase) {
+    return frase.length
+  })
+}
+
+// EJERCICIO 6: POSICIONES
+
+/*
+Usando map, definí la función posiciones que tome una lista de canciones de una playlist y devuelva un nuevo array con los números de las posiciones de cada canción.
+
+const playlist = ['Everlong', 'The Pretender', 'Learn to Fly'];
+ posiciones(playlist)
+ [ '0 - Everlong', '1 - The Pretender', '2 - Learn to Fly' ]
+
+*/
+
+let posiciones = (playlist) => {
+  return playlist.map (function playListOrdenada(cancion) {
+    return playlist.indexOf(cancion) + " - " + cancion
+  })
+}
+
+// console.log(posiciones(['Everlong', 'The Pretender', 'Learn to Fly']))
+
+
+// let preciosFinales = (listaproductos) => {
+//   return listaproductos.map (function costoTotal(producto) {
+//     let iva = ((ganancia+producto)*21)/100 
+//     let resultadoFinal = producto*1.5 + iva
+//     return resultadoFinal
+//   } )
+
+// }
+
+//sin variables "innecesarias"
+
+
+let preciosFinales = (listaproductos) => {
+  return listaproductos.map(function costoTotal(producto) {
+    return producto*(1.5) + (21*(producto*1.5))/100
+  })
+}
+
+
+
+//EJERCICIO 8: CORRESPONDER 
+
+/*
+Usando map, definí la función corresponder que tome una lista de costos con números que representan costos de diferentes articulos y una lista de productos con los nombres de cada producto y devuelva un nuevo array en donde el nombre de un producto en una posición, se corresponde con el precio final que está en la misma posición. Por ejemplo: el producto que está en la posición 1 tiene un precio igual al elemento en la posición 1 del array costos
+
+const productos = ['celular', 'notebook', 'monitor' ];
+const costos = [12.5, 56, 98];
+ corresponder(costos,productos)
+ ['celular 22.6875', 'notebook 101.64', 'monitor 177.87']
+*/
+
+const productos = ['celular', 'notebook', 'monitor' ];
+const costos = [12.5, 56, 98];
+
+
+// let corresponder = (productos, costos) => {
+//   let resultado = [];
+//   return productos.map(function machear(producto) {
+//     for (let i = 0; i < costos.length; i++) {
+//       resultado.push(producto + " " + costos[i])
+//       return resultado
+      
+//     }
+//   })
+
+// }
+
+// let corresponder = (productos, costos) => {
+//   return productos.map(function machear(producto, i) {
+//     return producto + " " + costos[i]
+//   })
+// }
+
+
+let corresponder = (productos, costos) => {
+  let preciosF = preciosFinales(costos);
+  return productos.map(function machear(producto, i) {
+    return producto + " " + preciosF[i]
+  })
+}
+
+// console.log(corresponder(productos,costos))
+
+
+//EJERCICIO 9: Los más caros
+/*
+Usando filter, definí la función losMasCaros que tome una lista de costos que representan costos de diferentes 
+productos y devuelva un nuevo array con los precios más caros (mayores a 50)
+
+const costos = [ 39, 53, 17, 99, 7, 9, 6, 68, 54, 97, 27, 90, 92, 75, 26, 86, 22, 42, 20, 14 ]
+ losMasCaros(costos)
+ [53, 99, 68, 54, 97, 90, 92, 75, 86]
+
+*/
+
+const costos2 = [ 39, 53, 17, 99, 7, 9, 6, 68, 54, 97, 27, 90, 92, 75, 26, 86, 22, 42, 20, 14 ]
+
+
+
+ let losMasCaros = (costos) => {
+   return costos.filter(function mayores(precio) {
+     return precio > 50
+   })
+
+ }
+
+
+//  console.log(losMasCaros(costos2))
+
+//EJERCICIO 10: IMPARES
+
+/*
+
+Usando filter, definí la función separandoPares que tome una lista de numeros con números al azar y devuelva un nuevo array 
+con los números pares. Y otra función separandoImpares que también tome una lista de números y devuelva un nuevo array con los números impares.
+
+const numeros = [43, 11, 18, 46, 44, 37, 42, 29, 9, 3, 37, 0, 40, 10, 38, 34, 25, 40, 4, 32];
+ separandoPares(numeros)
+[18, 46, 44, 42, 0, 40, 10, 38, 34, 40, 4, 32]
+ separandoImpares(numeros)
+[43, 11, 37, 29, 9, 3, 37, 25]
+
+*/
+
+let separandoPares = (numeros) => {
+  return numeros.filter(function pares(numero) {
+    return (numero % 2) === 0
+  })
+}
+
+
+let separandoImpares = (numeros) => {
+  return numeros.filter(function impares(numero) {
+    return (numero % 2) != 0
+  })
+}
+
+// console.log(separandoImpares([43, 11, 18, 46, 44, 37, 42, 29, 9, 3, 37, 0, 40, 10, 38, 34, 25, 40, 4, 32]))
+
+
+// EJERCICIO 11: SÓLO STRINGS 
+
+/*
+Usando filter, definí la función soloStrings que tome una lista de mix con varios elementos de distintos tipos de datos 
+y devuelva un nuevo array que contenga sólo los datos de tipo string.
+
+const mix = [ 'Ut vero.',2 , function () { console.log('hola mundo!') }, 56, 'Diam rebum nonumy et.', true, false,'Kasd stet.', 'Sit et dolor.', null, null, [ 1, 2, 3], 'Dolore.'];
+
+ soloStrings(mix)
+['Ut vero.', 'Diam rebum nonumy et.', 'Kasd stet.', 'Sit et dolor.', 'Dolore.' ]
+
+*/
+
+
+let soloStrings = (array) => {
+  return array.filter(function esString(elemento) {
+    return typeof(elemento) === "string"
+  })
+}
+
+//EJERCICIO 12: Playlist sin escuchar
+
+/*
+Usando filter, definí la función playlistSinEscuchar que tome una lista playlist con canciones sugeridas y otra lista playlistEscuchada con
+ canciones que ya escuchamos y devuelva un array con aquellas canciones de la playlist que no están en playlistEscuchada 
+
+const playlist = ['Smells Like Teen Spirit', 'Everlong', 'Come As You Are', 'The Pretender', 'Heart-Shaped Box', 'Learn to Fly', 'Lithium'];
+const playlistEscuchada = ['The Pretender', 'Lithium', 'Come As You Are']
+ playlistSinEscuchar(playlist, playlistEscuchada)
+ [ 'Smells Like Teen Spirit', 'Everlong', 'Heart-Shaped Box', 'Learn to Fly' ]
+*/
+
+
+const playlist = ['Smells Like Teen Spirit', 'Everlong', 'Come As You Are', 'The Pretender', 'Heart-Shaped Box', 'Learn to Fly', 'Lithium'];
+const playlistEscuchada = ['The Pretender', 'Lithium', 'Come As You Are']
+
+let playlistSinEscuchar = (sugerencias, escuchadas) => {
+  return sugerencias.filter(function sinEscuchar(cancion) {
+    return !escuchadas.includes(cancion)
+  })
+
+}
+
+// console.log(playlistSinEscuchar(playlist, playlistEscuchada))
